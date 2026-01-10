@@ -23,24 +23,19 @@ namespace NetSdrClientApp.Networking
 
         public void Connect()
         {
-            if (Connected)
-            {
-                Console.WriteLine($"Already connected to {_host}:{_port}");
-                return;
-            }
+            if (Connected) return;
 
             _tcpClient = new TcpClient();
-
             try
             {
                 _tcpClient.Connect(_host, _port);
                 _stream = _tcpClient.GetStream();
-                Console.WriteLine($"Connected to {_host}:{_port}");
+                // Console.WriteLine removed
                 _ = StartListeningAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Failed to connect: {ex.Message}");
+                // Console.WriteLine removed
             }
         }
 
@@ -48,17 +43,12 @@ namespace NetSdrClientApp.Networking
         {
             if (Connected)
             {
-                CancelToken(); 
+                CancelToken();
                 _stream?.Close();
                 _tcpClient?.Close();
-
                 _tcpClient = null;
                 _stream = null;
-                Console.WriteLine("Disconnected.");
-            }
-            else
-            {
-                Console.WriteLine("No active connection to disconnect.");
+                // Console.WriteLine removed
             }
         }
 
@@ -66,7 +56,7 @@ namespace NetSdrClientApp.Networking
         {
             if (Connected && _stream != null && _stream.CanWrite)
             {
-                Console.WriteLine($"Message sent: " + string.Join(" ", data.Select(b => b.ToString("X2"))));
+                // Console.WriteLine removed
                 await _stream.WriteAsync(data, 0, data.Length);
             }
             else
