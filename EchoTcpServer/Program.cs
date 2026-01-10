@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 
 public class Program
 {
@@ -40,7 +40,7 @@ public class UdpTimedSender : IDisposable
     private readonly string _host;
     private readonly int _port;
     private readonly UdpClient _udpClient;
-    private Timer _timer;
+    private Timer? _timer;
 
     public UdpTimedSender(string host, int port)
     {
@@ -55,7 +55,7 @@ public class UdpTimedSender : IDisposable
         _timer = new Timer(SendMessageCallback, null, 0, intervalMilliseconds);
     }
 
-    private void SendMessageCallback(object state)
+    private void SendMessageCallback(object? state)
     {
         try {
             byte[] msg = Encoding.UTF8.GetBytes("Ping");
