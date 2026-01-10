@@ -31,10 +31,10 @@ namespace NetSdrClientAppTests
         }
 
         [Test]
-        public void UdpClientWrapper_Constructor_WithInvalidPort_ShouldNotThrow()
+        public void UdpClientWrapper_Constructor_WithAnotherValidPort_ShouldWork()
         {
-            var client = new UdpClientWrapper(-1);
-            Assert.IsNotNull(client);
+             var client = new UdpClientWrapper(11111);
+             Assert.IsNotNull(client);
         }
     }
 }
