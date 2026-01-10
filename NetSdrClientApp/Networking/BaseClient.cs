@@ -15,12 +15,12 @@ namespace NetSdrClientApp.Networking
             MessageReceived?.Invoke(this, data);
         }
 
-        protected async Task RunListenerLoop(Func<CancellationToken, Task> listenAction)
+      protected async Task RunListenerLoop(Func<CancellationToken, Task> listenAction)
         {
             try
             {
                 _cts = new CancellationTokenSource();
-                Console.WriteLine("Starting listening for incoming messages.");
+                // Console.WriteLine("Starting listening for incoming messages."); // <--- DELETED
 
                 while (!_cts.Token.IsCancellationRequested)
                 {
@@ -33,11 +33,11 @@ namespace NetSdrClientApp.Networking
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error in listening loop: {ex.Message}");
+                // Console.WriteLine($"Error in listening loop: {ex.Message}"); // <--- DELETED
             }
             finally
             {
-                Console.WriteLine("Listener stopped.");
+                // Console.WriteLine("Listener stopped."); // <--- DELETED
             }
         }
 
