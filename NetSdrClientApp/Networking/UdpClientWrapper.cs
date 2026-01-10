@@ -28,11 +28,16 @@ namespace NetSdrClientApp.Networking
             });
         }
 
-        public void Exit()
+        public void StopListening()
         {
             CancelToken();
             _udpClient?.Close();
             _udpClient = null;
+        }
+
+        public void Exit()
+        {
+            StopListening();
         }
     }
 }
