@@ -36,13 +36,13 @@ public class UdpClientWrapper : IUdpClient
             }
         }
         catch (OperationCanceledException)
-        {
-            //empty
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error receiving message: {ex.Message}");
-        }
+            {
+                //empty
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error receiving message: {ex.Message}");
+            }
     }
 
     public void StopListening()
