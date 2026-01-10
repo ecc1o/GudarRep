@@ -27,14 +27,15 @@ jobs:
           dotnet tool install --global dotnet-sonarscanner
           echo "$env:USERPROFILE\.dotnet\tools" >> $env:GITHUB_PATH
           dotnet sonarscanner begin `
-          /d:sonar.projectKey="ecc1o_GudarRep" `
-          /d:sonar.organization="ecc1o" `
-          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
-          /d:sonar.cs.opencover.reportsPaths="**/coverage.xml" `
-          /d:sonar.cpd.cs.minimumTokens=40 `
-          /d:sonar.cpd.cs.minimumLines=5 `
-          /d:sonar.exclusions=**/bin/**,**/obj/**,**/sonarcloud.yml `
-          /d:sonar.qualitygate.wait=true
+            /k:"ecc1o_GudarRep" `
+            /o:"ecc1o" `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+            /d:sonar.host.url="https://sonarcloud.io" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.xml" `
+            /d:sonar.cpd.cs.minimumTokens=40 `
+            /d:sonar.cpd.cs.minimumLines=5 `
+            /d:sonar.exclusions=**/bin/**,**/obj/**,**/sonarcloud.yml `
+            /d:sonar.qualitygate.wait=true
         shell: pwsh
 
       - name: Restore
