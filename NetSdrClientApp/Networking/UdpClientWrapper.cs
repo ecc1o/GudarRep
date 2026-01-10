@@ -39,7 +39,7 @@ public class UdpClientWrapper : IUdpClient
         {
             //empty
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Console.WriteLine($"Error receiving message: {ex.Message}");
         }
