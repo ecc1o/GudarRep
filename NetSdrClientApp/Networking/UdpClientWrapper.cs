@@ -10,11 +10,6 @@ namespace NetSdrClientApp.Networking
         private readonly IPEndPoint _localEndPoint;
         private UdpClient? _udpClient;
 
-        public event EventHandler<byte[]>? MessageReceived
-        {
-            add => base.MessageReceived += value;
-            remove => base.MessageReceived -= value;
-        }
 
         public UdpClientWrapper(int port)
         {
@@ -28,12 +23,12 @@ namespace NetSdrClientApp.Networking
 
             await RunListenerLoop(async (token) =>
             {
-                var result = await _udpClient.ReceiveAsync(); 
+                var result = await _udpClient.ReceiveAsync(token);
                 OnMessageReceived(result.Buffer);
             });
         }
 
-        public void StopListening()
+        public void Exit()
         {
             CancelToken();
             _udpClient?.Close();
